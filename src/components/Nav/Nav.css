@@ -1,0 +1,42 @@
+.nav {
+  background: linear-gradient(345deg, #54f38c 5%, #b0fa7e 50%);
+  box-shadow: rgba(46, 60, 73, 0.4) 0px 0px 10px 0px;
+}
+
+.nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-decoration: none;
+}
+
+.nav li:first-child {
+  padding-left: 0;
+}
+
+ul {
+  padding-left: 0;
+  padding: 0;
+  margin: 0;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+li {
+  list-style-type: none;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.user-name-header {
+  font-size: 1em;
+  margin-right: 12px;
+}
+
+.userSelect {
+  padding: 10px;
+}
+
+.menu-btn {
+  padding: 10px;
+}
