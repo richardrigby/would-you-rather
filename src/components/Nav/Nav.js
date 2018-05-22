@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
@@ -66,27 +66,43 @@ function Nav(props) {
           </DropdownMenu>
         </div>
         {!authedUser ? null : (
-          <ul>
-            <li>
-              <NavLink
-                className="menu-btn"
-                to="/"
-                exact
-                activeClassName="active"
-              >
-                <Button>Questions</Button>
-              </NavLink>
-              <NavLink
-                className="menu-btn"
-                to="/"
-                exact
-                activeClassName="active"
-              >
-                <Button>Leaderboard</Button>
-              </NavLink>
-            </li>
-            <li />
-          </ul>
+          <Fragment>
+            <ul>
+              <li>
+                <NavLink
+                  className="menu-btn"
+                  to="/"
+                  exact
+                  activeClassName="active"
+                >
+                  <Button>Questions</Button>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="menu-btn"
+                  to="/leaderboard"
+                  exact
+                  activeClassName="active"
+                >
+                  <Button>Leaderboard</Button>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="menu-btn"
+                  to="/new"
+                  exact
+                  activeClassName="active"
+                >
+                  <Button>New</Button>
+                </NavLink>
+              </li>
+              <li>
+                <h3 className="center">Would you Rather?</h3>
+              </li>
+            </ul>
+          </Fragment>
         )}
       </nav>
     </div>

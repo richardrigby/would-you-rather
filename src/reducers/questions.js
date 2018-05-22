@@ -13,7 +13,7 @@ export default function users(state = {}, action) {
       const { question } = action;
       return {
         ...state,
-        [action.question.id]: action.question
+        [question.id]: question
       };
     // case ADD_QUESTION_ANSWER:
     // const {id, user, option} = action;

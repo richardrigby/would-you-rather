@@ -2,56 +2,85 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import Tabs from "@atlaskit/tabs";
+import Button from "@atlaskit/button";
+import { formatDate } from "../../utils/helpers";
+import Question from "../Question";
 
 class Dashboard extends Component {
+  state = {
+    isShowAnswered: false
+  };
+
+  toggleIsShowAnswered = () => {
+    this.setState((prevState, props) => {
+      return { isShowAnswered: !prevState.isShowAnswered };
+    });
+  };
+
   render() {
-    const { anwsered, unanswered } = this.props;
+    const { answered, unanswered } = this.props;
 
-    const UnansweredContent = ({ unanswered }) => {
-      return unanswered === undefined ? null : (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            flexBasis: "100%",
-            overflowY: "scroll"
-          }}
-        >
-          {unanswered.map(element => {
-            return (
-              <Fragment key={element.id}>
-                <Link to={`/question/${element.id}`}>
-                  <div>
-                    <h3>Would you rather?</h3>
-                    <p>
-                      {element.optionOne.text} OR {element.optionTwo.text}
-                    </p>
-                    <hr />
-                  </div>
-                </Link>
-              </Fragment>
-            );
-          })}
-        </div>
-      );
-    };
+    console.log("answered:", answered);
+    console.log("unanwsered:", unanswered);
 
-    const tabs = [
-      {
-        label: "Unanwsered",
-        content: <UnansweredContent unanswered={unanswered} />
-      },
-      { label: "Anwsered", content: <p>Two</p> }
-    ];
+    const { isShowAnswered } = this.state;
 
     return (
-      <div>
-        <h3 className="center">Would you Rather?</h3>
-        <Tabs
-          tabs={tabs}
-          onSelect={(tab, index) => console.log("Selected Tab", index + 1)}
-        />
+      <div style={{ margin: 12 }}>
+        {isShowAnswered ? (
+          <Button className="right" onClick={this.toggleIsShowAnswered}>
+            Unanwsered
+          </Button>
+        ) : (
+          <Button className="right" onClick={this.toggleIsShowAnswered}>
+            Anwsered
+          </Button>
+        )}
+
+        {isShowAnswered ? (
+          answered === undefined ? null : (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                flexBasis: "100%",
+                overflowY: "scroll"
+              }}
+            >
+              {unanswered.map(question => <Question question={question} />)}
+            </div>
+          )
+        ) : unanswered === undefined ? null : (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              flexBasis: "100%",
+              overflowY: "scroll"
+            }}
+          >
+            {unanswered.map(question => {
+              return (
+                <Fragment key={question.id}>
+                  <Link to={`/question/${question.id}`}>
+                    <div>
+                      <div className="center">
+                        <Button>{question.optionOne.text}</Button>
+                        <span style={{ margin: "2em" }}>OR</span>
+                        <Button>{question.optionTwo.text}</Button>
+                        <div className="right">
+                          {formatDate(question.timestamp)}
+                        </div>
+                      </div>
+                      {/* <hr /> */}
+                    </div>
+                  </Link>
+                </Fragment>
+              );
+            })}
+          </div>
+        )}
+
         <br />
         <br />
         <hr />
@@ -107,11 +136,10 @@ function mapStateToProps({ questions, authedUser }) {
       q.optionTwo.votes.includes(authedUser)
   );
   const unanswered = qs.filter(q => !answered.includes(q));
-  console.log("anwsered:", answered);
-  console.log("unanwsered:", unanswered);
+
   return {
-    answered,
-    unanswered
+    answered: answered.sort((a, b) => b.timestamp - a.timestamp),
+    unanswered: unanswered.sort((a, b) => b.timestamp - a.timestamp)
   };
 }
 

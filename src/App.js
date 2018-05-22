@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 import { handleInitialData } from "./actions/shared";
 import Dashboard from "./components/Dashboard";
 import QuestionPage from "./components/QuestionPage";
+import NewQuestion from "./components/NewQuestion";
 import LoadingBar from "react-redux-loading";
+import Leaderboard from "./components/Leaderboard";
 import Nav from "./components/Nav";
 // import Button from "@atlaskit/button";
 
@@ -24,8 +26,9 @@ class App extends Component {
             {!authedUser ? null : (
               <div>
                 <Route path="/" exact component={Dashboard} />
+                <Route path="/leaderboard" exact component={Leaderboard} />
                 <Route path="/question/:id" component={QuestionPage} />
-                <Route path="/new" component={Dashboard} />
+                <Route path="/new" exact component={NewQuestion} />
               </div>
             )}
           </div>
