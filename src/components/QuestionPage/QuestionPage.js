@@ -2,7 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import Question from "../Question";
 
-function QuestionPage({ question, user }) {
+function QuestionPage(props) {
+  const { question, user } = props;
+  console.log("props in:", props);
   return (
     <div style={{ margin: "2em" }}>
       <div className="center">
@@ -18,7 +20,8 @@ function QuestionPage({ question, user }) {
   );
 }
 
-function mapStateToProps({ authedUser, questions, users }, props) {
+function mapStateToProps(state, props) {
+  const { questions, users } = state;
   const { id } = props.match.params;
   return {
     question: questions[id],
