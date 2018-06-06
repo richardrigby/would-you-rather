@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-          <LoadingBar />
+          <LoadingBar style={{ backgroundColor: "green", height: "5px" }} />
           <div className="container">
             <Nav />
             {!authedUser ? null : (
