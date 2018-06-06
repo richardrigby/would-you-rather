@@ -5,6 +5,23 @@ import { withRouter } from "react-router-dom";
 import Button from "@atlaskit/button";
 import { formatDate } from "../../utils/helpers";
 import Question from "../Question";
+import styled from "styled-components";
+
+const ContentControl = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 24px 12px;
+`;
+
+const Title = styled.h2``;
+
+const QuestionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  margin: 2em;
+`;
 
 class Dashboard extends Component {
   state = {
@@ -19,46 +36,39 @@ class Dashboard extends Component {
 
   render() {
     const { answered, unanswered } = this.props;
-
-    console.log("answered:", answered);
-    console.log("unanwsered:", unanswered);
-
     const { isShowAnswered } = this.state;
 
+    console.log("unanswered:", unanswered);
+    console.log("answered:", answered);
+
     return (
-      <div style={{ margin: 12 }}>
-        {isShowAnswered ? (
-          <Button className="right" onClick={this.toggleIsShowAnswered}>
-            Unanwsered
-          </Button>
-        ) : (
-          <Button className="right" onClick={this.toggleIsShowAnswered}>
-            Anwsered
-          </Button>
-        )}
+      <div>
+        <ContentControl>
+          {isShowAnswered ? (
+            <Fragment>
+              <div />
+              <Title>Anwsered Questions</Title>
+              <Button onClick={this.toggleIsShowAnswered}>Unanwsered</Button>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <div />
+              <Title>Unanwsered Questions</Title>
+              <Button onClick={this.toggleIsShowAnswered}>Anwsered</Button>
+            </Fragment>
+          )}
+        </ContentControl>
 
         {isShowAnswered ? (
           answered === undefined ? null : (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                flexBasis: "100%",
-                overflowY: "scroll"
-              }}
-            >
-              {unanswered.map(question => <Question question={question} />)}
-            </div>
+            <QuestionContainer>
+              {answered.map(question => (
+                <Question key={question.id} question={question} />
+              ))}
+            </QuestionContainer>
           )
         ) : unanswered === undefined ? null : (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              flexBasis: "100%",
-              overflowY: "scroll"
-            }}
-          >
+          <QuestionContainer>
             {unanswered.map(question => {
               return (
                 <Fragment key={question.id}>
@@ -78,57 +88,14 @@ class Dashboard extends Component {
                 </Fragment>
               );
             })}
-          </div>
+          </QuestionContainer>
         )}
-
-        <br />
-        <br />
-        <hr />
-        <br />
-        <br />
-        <ul>
-          <li>Toggle between his/her answered and unanswered polls.</li>
-          <li>The unanswered questions should be shown by default.</li>
-          <li>Each polling question should link to the details of that poll</li>
-          <li>
-            The details of each poll should be available at
-            questions/:question_id.
-          </li>
-          <li>
-            <span>
-              When a poll is clicked on the home page, the following is shown:
-            </span>
-            <ol>
-              <li>Text “Would You Rather”;</li>
-              <li>Avatar of the user who posted the polling question; and</li>
-              <li>Two Options</li>
-            </ol>
-          </li>
-
-          <li>
-            <span>
-              For answered polls, each of the two options contains the
-              following:
-            </span>
-            <ol>
-              <li>Text of the option;</li>
-              <li>Number of people who voted for that option; and</li>
-              <li>Percentage of people who voted for that option.</li>
-            </ol>
-          </li>
-
-          <li>
-            The option selected by the logged-in user should be clearly marked.
-          </li>
-          <li />
-          <li />
-        </ul>
       </div>
     );
   }
 }
 
-function mapStateToProps({ questions, authedUser }) {
+function mapStateToProps({ questions, authedUser, users }) {
   const qs = Object.values(questions);
   const answered = qs.filter(
     q =>
