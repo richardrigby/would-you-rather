@@ -1,26 +1,42 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
-const Title = styled.h2``;
-
+const Title = styled.h2`
+  text-align: center;
+`;
+const Container = styled.div`
+  margin: 2em;
+`;
 function Leaderboard({ users }) {
-  console.log("users:", users);
   return (
-    <Fragment>
+    <Container className="center">
       <Title>Leaderboard</Title>
-      {!users
-        ? null
-        : users.map(user => {
-            return (
-              <p key={user.id}>
-                {user.name} Total Votes:{user.totalVotes}, Total Question:{
-                  user.totalQuestions
-                }
-              </p>
-            );
-          })}
-    </Fragment>
+      <table width="90%">
+        <tbody>
+          <tr>
+            <th align="left">Name</th>
+            <th># Votes</th>
+            <th># Questions</th>
+            <th>Total</th>
+          </tr>
+          {!users
+            ? null
+            : users.map((user, index) => {
+                return (
+                  <tr key={user.id}>
+                    <td align="left">
+                      {index + 1}. {user.name}
+                    </td>
+                    <td>{user.totalVotes}</td>
+                    <td>{user.totalQuestions}</td>
+                    <td>{user.grandTotal}</td>
+                  </tr>
+                );
+              })}
+        </tbody>
+      </table>
+    </Container>
   );
 }
 
