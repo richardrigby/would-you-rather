@@ -8,6 +8,7 @@
   flex-direction: row;
   justify-content: flex-start;
   text-decoration: none;
+  flex-wrap: wrap;
 }
 
 .nav li:first-child {

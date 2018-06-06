@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
@@ -14,7 +14,7 @@ import { setAuthedUser, logoutUser } from "../../actions/authedUser";
 const handleUserSelect = (e, dispatch, id) => {
   e.preventDefault();
   console.log(id);
-
+  dispatch(logoutUser());
   dispatch(setAuthedUser(id));
 };
 
@@ -24,13 +24,64 @@ const handleUserLogout = (e, dispatch) => {
   dispatch(logoutUser());
 };
 
+const styles = {
+  navbar: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "stretch"
+  }
+};
+
 function Nav(props) {
   const { users, loading, authedUser, dispatch } = props;
 
   let user = users.filter(user => user.id === authedUser);
   return (
     <div className="nav">
-      <nav>
+      <nav style={styles.navbar}>
+        {!authedUser ? (
+          <div />
+        ) : (
+          <div>
+            <ul>
+              <li>
+                <NavLink
+                  className="menu-btn"
+                  to="/"
+                  exact
+                  activeClassName="active"
+                >
+                  <Button>Questions</Button>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="menu-btn"
+                  to="/leaderboard"
+                  exact
+                  activeClassName="active"
+                >
+                  <Button>Leaderboard</Button>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="menu-btn"
+                  to="/new"
+                  exact
+                  activeClassName="active"
+                >
+                  <Button>New</Button>
+                </NavLink>
+              </li>
+              {/* <li>
+                <h3 className="center">Would you Rather?</h3>
+              </li> */}
+            </ul>
+          </div>
+        )}
+        <h3 className="center">Would you Rather?</h3>
         <div className="right userSelect">
           <DropdownMenu
             trigger={user.length === 1 ? user[0].name : "Login User"}
@@ -65,45 +116,6 @@ function Nav(props) {
             </DropdownItemGroup>
           </DropdownMenu>
         </div>
-        {!authedUser ? null : (
-          <Fragment>
-            <ul>
-              <li>
-                <NavLink
-                  className="menu-btn"
-                  to="/"
-                  exact
-                  activeClassName="active"
-                >
-                  <Button>Questions</Button>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="menu-btn"
-                  to="/leaderboard"
-                  exact
-                  activeClassName="active"
-                >
-                  <Button>Leaderboard</Button>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="menu-btn"
-                  to="/new"
-                  exact
-                  activeClassName="active"
-                >
-                  <Button>New</Button>
-                </NavLink>
-              </li>
-              <li>
-                <h3 className="center">Would you Rather?</h3>
-              </li>
-            </ul>
-          </Fragment>
-        )}
       </nav>
     </div>
   );
