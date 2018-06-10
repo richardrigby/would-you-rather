@@ -13,7 +13,6 @@ import { setAuthedUser, logoutUser } from "../../actions/authedUser";
 
 const handleUserSelect = (e, dispatch, id) => {
   e.preventDefault();
-  console.log(id);
   dispatch(logoutUser());
   dispatch(setAuthedUser(id));
 };
@@ -68,7 +67,7 @@ function Nav(props) {
               <li>
                 <NavLink
                   className="menu-btn"
-                  to="/new"
+                  to="/add"
                   exact
                   activeClassName="active"
                 >
