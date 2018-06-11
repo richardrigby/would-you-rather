@@ -8,9 +8,8 @@ import NewQuestion from "./components/NewQuestion";
 import LoadingBar from "react-redux-loading";
 import Leaderboard from "./components/Leaderboard";
 import Nav from "./components/Nav";
-// import Button from "@atlaskit/button";
 
-const _404 = function(props) {
+const NotFound = function(props) {
   return (
     <h2 style={{ textAlign: "center", margin: "2em" }}>404 - page not found</h2>
   );
@@ -34,7 +33,7 @@ class App extends Component {
                 <Route path="/leaderboard" exact component={Leaderboard} />
                 <Route path="/question/:id" component={QuestionPage} />
                 <Route path="/add" exact component={NewQuestion} />
-                <Route component={_404} />
+                <Route component={NotFound} />
               </Switch>
             )}
           </div>
