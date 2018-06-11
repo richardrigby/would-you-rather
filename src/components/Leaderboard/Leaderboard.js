@@ -8,11 +8,14 @@ const Title = styled.h2`
 const Container = styled.div`
   margin: 2em;
 `;
+const Avatar = styled.img`
+  margin-bottom: -18px;
+`;
 function Leaderboard({ users }) {
   return (
     <Container className="center">
       <Title>Leaderboard</Title>
-      <table width="90%">
+      <table width="80%" border="1px solid black">
         <tbody>
           <tr>
             <th align="left">Name</th>
@@ -26,7 +29,16 @@ function Leaderboard({ users }) {
                 return (
                   <tr key={user.id}>
                     <td align="left">
-                      {index + 1}. {user.name}
+                      <div style={{ minHeight: "60px" }}>
+                        <span>{index + 1}.</span>
+
+                        <Avatar
+                          src={user.avatarURL}
+                          className="avatar"
+                          alt={`Avatar of ${user.name}`}
+                        />
+                        <span> {user.name}</span>
+                      </div>
                     </td>
                     <td>{user.totalVotes}</td>
                     <td>{user.totalQuestions}</td>
