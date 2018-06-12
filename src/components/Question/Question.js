@@ -13,7 +13,7 @@ const style = {
     marginRight: "0.6em"
   },
   option: {
-    width: 200,
+    minwidth: 200,
     height: 100
   }
 };
@@ -62,6 +62,7 @@ const Option = ({ text, question, dispatch }) => {
       <Button
         style={style.option}
         onClick={e => handleOptionSelection(e, text, question, dispatch)}
+        appearance="primary"
       >
         <OptionButton>
           <div>{text}</div>
@@ -71,15 +72,28 @@ const Option = ({ text, question, dispatch }) => {
   );
 };
 
-const OptionStats = ({ text, numVotes, totalVotes, question, dispatch }) => {
+const OptionStats = ({
+  option,
+  text,
+  numVotes,
+  totalVotes,
+  question,
+  answered,
+  dispatch
+}) => {
   const percent = totalVotes > 0 ? numVotes / totalVotes * 100 : 0;
   return (
     <Fragment>
       <Button
         style={style.option}
-        onClick={e => handleOptionSelection(e, text, question, dispatch)}
+        appearance={option === answered ? "warning" : "default"}
+        onClick={
+          answered
+            ? null
+            : e => handleOptionSelection(e, text, question, dispatch)
+        }
       >
-        <OptionButton>
+        <OptionButton answered={answered}>
           <div>{text}</div>
           <div>
             ({numVotes} {numVotes === 1 ? "Vote" : "Votes"} /{" "}
@@ -92,19 +106,28 @@ const OptionStats = ({ text, numVotes, totalVotes, question, dispatch }) => {
 };
 
 function Question(props) {
-  const { question, dispatch } = props;
+  const { question, authedUser, dispatch } = props;
   const optionOne = question.optionOne;
   const optionTwo = question.optionTwo;
   const totalVotes = optionOne.votes.length + optionTwo.votes.length;
+
+  let answered = null;
+  if (optionOne.votes.includes(authedUser)) {
+    answered = "optionOne";
+  } else if (optionTwo.votes.includes(authedUser)) {
+    answered = "optionTwo";
+  }
 
   return (
     <Container>
       {totalVotes > 0 ? (
         <OptionStats
+          option="optionOne"
           text={optionOne.text}
           numVotes={optionOne.votes.length}
           totalVotes={totalVotes}
           question={question}
+          answered={answered}
           dispatch={dispatch}
         />
       ) : (
@@ -116,10 +139,12 @@ function Question(props) {
       </div>
       {totalVotes > 0 ? (
         <OptionStats
+          option="optionTwo"
           text={optionTwo.text}
           numVotes={optionTwo.votes.length}
           totalVotes={totalVotes}
           question={question}
+          answered={answered}
           dispatch={dispatch}
         />
       ) : (
@@ -129,4 +154,11 @@ function Question(props) {
   );
 }
 
-export default connect()(Question);
+function mapStatetoProps(state, props) {
+  const { authedUser } = state;
+  return {
+    authedUser
+  };
+}
+
+export default connect(mapStatetoProps)(Question);

@@ -38,9 +38,6 @@ class Dashboard extends Component {
     const { answered, unanswered } = this.props;
     const { isShowAnswered } = this.state;
 
-    console.log("unanswered:", unanswered);
-    console.log("answered:", answered);
-
     return (
       <div>
         <ContentControl>
@@ -82,7 +79,6 @@ class Dashboard extends Component {
                           {formatDate(question.timestamp)}
                         </div>
                       </div>
-                      {/* <hr /> */}
                     </div>
                   </Link>
                 </Fragment>

@@ -4,7 +4,6 @@ import Question from "../Question";
 
 function QuestionPage(props) {
   const { question, user } = props;
-  console.log("props in:", props);
   return (
     <div style={{ margin: "2em" }}>
       <div className="center">
