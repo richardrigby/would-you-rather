@@ -25,10 +25,11 @@ const Container = styled.div`
   justify-content: center;
   align-items: stretch;
   margin: 1em auto;
-  border: 2px solid grey;
+  border: 1px solid #54f38c;
   border-radius: 4px;
   padding: 1em;
   padding-bottom: 2.5em;
+  background-color: #b0fa7ea9;
   @media (max-width: 700px) {
     flex-direction: column;
   }

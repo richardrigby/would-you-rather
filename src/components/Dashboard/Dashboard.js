@@ -70,14 +70,12 @@ class Dashboard extends Component {
               return (
                 <Fragment key={question.id}>
                   <Link to={`/question/${question.id}`}>
-                    <div>
-                      <div className="center">
-                        <Button>{question.optionOne.text}</Button>
-                        <span style={{ margin: "2em" }}>OR</span>
-                        <Button>{question.optionTwo.text}</Button>
-                        <div className="right">
-                          {formatDate(question.timestamp)}
-                        </div>
+                    <div className="center">
+                      <Button>{question.optionOne.text}</Button>
+                      <span style={{ margin: "2em" }}>OR</span>
+                      <Button>{question.optionTwo.text}</Button>
+                      <div className="right">
+                        {formatDate(question.timestamp)}
                       </div>
                     </div>
                   </Link>
