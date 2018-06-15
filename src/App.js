@@ -8,6 +8,7 @@ import NewQuestion from "./components/NewQuestion";
 import LoadingBar from "react-redux-loading";
 import Leaderboard from "./components/Leaderboard";
 import Nav from "./components/Nav";
+import "./App.css";
 
 const NotFound = function(props) {
   return (
@@ -27,7 +28,11 @@ class App extends Component {
           <LoadingBar style={{ backgroundColor: "green", height: "5px" }} />
           <div className="container">
             <Nav />
-            {!authedUser ? null : (
+            {!authedUser ? (
+              <h2 className="center login-help">
+                Please login to get started.
+              </h2>
+            ) : (
               <Switch>
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/leaderboard" exact component={Leaderboard} />
