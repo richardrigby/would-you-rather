@@ -1,90 +1,47 @@
 # Would You Rather Project
 
-This is my implementation of the project for Udacity's React & Redux course.
+Would You Rather is an application allowing users vote on poll questions. Users are also able to create new poll questions. The poll questions can only have two possible answers.
+User must be logged in to use the application. For demonstration porposees the application has three user accounts which can be used to login. The user can choose a user account to "login" as. There is a leaderboard which ranks the uses based on the sum total number of answered questions as well and question created by the user.
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+## Getting Started
 
-Would You Rather is an application allowing users vote on poll questions. Users can also create new polls.
-User must be logged in to use the application. The application has three user account which can be used. The user can choose a user account to "login" as.
+### Clone the repo
 
-## Folder Structure
+`git clone https://github.com/richardrigby/would-you-rather.git`
 
-```
-would-you-rather/
-  README.md
-  node_modules/
-  package.json
-  public/
-    index.html
-    favicon.ico
-    manifest.json
-  src/
-    actions/
-      authedUser.js
-      questions.js
-      shared.js
-      users.js
-    components/
-      Dashboard/
-        index.js
-        Dashboard.js
-      Leaderboard/
-        index.js
-        Leaderboard.js
-      Nav/
-        index.js
-        Nav.js
-      NewQuestion/
-        index.js
-        NewQuestion.js
-      Question/
-        index.js
-        Question.js
-      QuestionPage/
-        index.js
-        QuestionPage.js
-    middleware/
-      index.js
-      logger.js
-    reducers/
-      authedUser.js
-      index.js
-      questions.js
-      users.js
-    utils/
-      _DATA.js
-      api.js
-      helpers.js
-    App.css
-    App.js
-    App.test.js
-    index.css
-    index.js
-    registerServiceWorker.js
-```
+### Install dependencies
 
-## Available Scripts
+`npm install` or `yarn`
 
-To install dependencies run:
+### To launch application using dev server run:
 
-### `npm install` or `yarn`
+`npm start` or `yarn start`
 
-To launch application using dev server run:
+## Deployment
 
-### `npm start` or `yarn start`
+Not deployed anywhere
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Built With
 
-### `npm run build` or `yarn build`
+* [React](https://reactjs.org) - UI Library
+* [Redux](https://redux.js.org) - State management
+* [Atlaskit](https://atlaskit.atlassian.com/) - UI Component Library
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Contributing
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+This project is not open to contributions.
 
-See the section about [deployment](#deployment) for more information.
+## Versioning
+
+There is no versioning
+
+## Authors
+
+* **Richard Rigbyn** - [richardrigby](https://github.com/richardrigby)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Data
 
