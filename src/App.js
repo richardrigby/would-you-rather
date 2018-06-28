@@ -15,13 +15,22 @@ const NotFound = function(props) {
     <h2 style={{ textAlign: "center", margin: "2em" }}>404 - page not found</h2>
   );
 };
+
+const qidExists = (props, questionIds) => {
+  if (questionIds.includes(props.match.params.id)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
   }
 
   render() {
-    const { authedUser } = this.props;
+    const { authedUser, questionIds } = this.props;
     return (
       <Router>
         <Fragment>
@@ -36,7 +45,16 @@ class App extends Component {
               <Switch>
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/leaderboard" exact component={Leaderboard} />
-                <Route path="/question/:id" component={QuestionPage} />
+                <Route
+                  path="/question/:id"
+                  render={props =>
+                    qidExists(props, questionIds) ? (
+                      <QuestionPage {...props} />
+                    ) : (
+                      <NotFound />
+                    )
+                  }
+                />
                 <Route path="/add" exact component={NewQuestion} />
                 <Route component={NotFound} />
               </Switch>
@@ -48,9 +66,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ users, authedUser }) {
+function mapStateToProps({ users, authedUser, questions }) {
   const loading = users.length === 0;
-  return { loading, authedUser };
+  const questionIds = Object.values(questions).map(q => q.id);
+  return { loading, authedUser, questionIds };
 }
 
 export default connect(mapStateToProps)(App);
