@@ -1,6 +1,8 @@
-import { RECEIVE_USERS } from "../actions/users";
-import { UPDATE_USER_QUESTIONS } from "../actions/users";
-import { UPDATE_USER_VOTES } from "../actions/users";
+import {
+  RECEIVE_USERS,
+  UPDATE_USER_QUESTIONS,
+  UPDATE_USER_VOTES
+} from "../actions/users.actionsTypes";
 
 export default function users(state = {}, action) {
   switch (action.type) {

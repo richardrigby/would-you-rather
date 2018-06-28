@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import Button from "@atlaskit/button";
-import { handleAddQuestion } from "../../actions/questions";
+import { handleAddQuestion } from "../../actions/questions.actions";
 import { Redirect } from "react-router-dom";
 
 class NewQuetion extends Component {
@@ -26,9 +26,7 @@ class NewQuetion extends Component {
 
   handleOptionOneChange = e => {
     const text = e.target.value;
-    this.setState(() => ({
-      optionOneText: text
-    }));
+    this.setState({ optionOneText: text });
   };
 
   handleOptionTwoChange = e => {

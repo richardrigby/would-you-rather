@@ -26,23 +26,31 @@ function Leaderboard({ users }) {
           {!users
             ? null
             : users.map((user, index) => {
+                const {
+                  id,
+                  avatarURL,
+                  name,
+                  totalQuestions,
+                  totalVotes,
+                  grandTotal
+                } = user;
                 return (
-                  <tr key={user.id}>
+                  <tr key={id}>
                     <td align="left">
                       <div style={{ minHeight: "60px" }}>
                         <span>{index + 1}.</span>
 
                         <Avatar
-                          src={user.avatarURL}
+                          src={avatarURL}
                           className="avatar"
-                          alt={`Avatar of ${user.name}`}
+                          alt={`Avatar of ${name}`}
                         />
-                        <span> {user.name}</span>
+                        <span> {name}</span>
                       </div>
                     </td>
-                    <td>{user.totalVotes}</td>
-                    <td>{user.totalQuestions}</td>
-                    <td>{user.grandTotal}</td>
+                    <td>{totalVotes}</td>
+                    <td>{totalQuestions}</td>
+                    <td>{grandTotal}</td>
                   </tr>
                 );
               })}
@@ -53,7 +61,7 @@ function Leaderboard({ users }) {
 }
 
 function mapStateToProps({ users }) {
-  let userArray = Object.values(users).map(user => {
+  const userArray = Object.values(users).map(user => {
     const totalVotes = Object.values(user.answers).length;
     const totalQuestions = user.questions.length;
     const grandTotal = totalVotes + totalQuestions;

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import styled from "styled-components";
 import Button from "@atlaskit/button";
 import { connect } from "react-redux";
-import { handleAddQuestionVotes } from "../../actions/questions";
+import { handleAddQuestionVotes } from "../../actions/questions.actions";
 
 const style = {
   or: {
@@ -48,12 +48,14 @@ const handleOptionSelection = (e, text, question, dispatch) => {
   const optionOne = question.optionOne;
   const optionTwo = question.optionTwo;
 
-  let option = "";
-  if (text === optionOne.text) {
-    option = "optionOne";
-  } else if (text === optionTwo.text) {
-    option = "optionTwo";
-  }
+  const option = (() => {
+    if (text === optionOne.text) {
+      return "optionOne";
+    } else if (text === optionTwo.text) {
+      return "optionTwo";
+    }
+  })();
+
   dispatch(handleAddQuestionVotes(question, option));
 };
 

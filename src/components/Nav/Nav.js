@@ -9,7 +9,7 @@ import DropdownMenu, {
 } from "@atlaskit/dropdown-menu";
 import Button from "@atlaskit/button";
 import "./Nav.css";
-import { setAuthedUser, logoutUser } from "../../actions/authedUser";
+import { setAuthedUser, logoutUser } from "../../actions/authedUser.actions";
 
 const handleUserSelect = (e, dispatch, id) => {
   e.preventDefault();
@@ -80,7 +80,7 @@ function Nav(props) {
             </ul>
           </div>
         )}
-        <h3 className="center">Would you Rather?</h3>
+        <h3 className="center title">Would you Rather?</h3>
         <div className="right userSelect">
           <DropdownMenu
             trigger={user.length === 1 ? user[0].name : "Login User"}

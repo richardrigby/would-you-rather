@@ -35,8 +35,10 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { answered, unanswered } = this.props;
-    const { isShowAnswered } = this.state;
+    const {
+      props: { answered, unanswered },
+      state: { isShowAnswered }
+    } = this;
 
     return (
       <div>

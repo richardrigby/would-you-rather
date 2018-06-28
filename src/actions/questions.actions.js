@@ -1,10 +1,11 @@
 import { showLoading, hideLoading } from "react-redux-loading";
-import { updateUserQuestions, updateUserVotes } from "../actions/users";
+import { updateUserQuestions, updateUserVotes } from "../actions/users.actions";
 import { _saveQuestion, _saveQuestionAnswer } from "../utils/_DATA";
-
-export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
-export const ADD_QUESTION = "ADD_QUESTION";
-export const ADD_QUESTION_ANSWER = "ADD_QUESTION_ANSWER";
+import {
+  ADD_QUESTION,
+  ADD_QUESTION_ANSWER,
+  RECEIVE_QUESTIONS
+} from "./questions.actionsTypes";
 
 export function receiveQuestions(questions) {
   return {
